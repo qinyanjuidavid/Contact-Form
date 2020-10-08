@@ -1,0 +1,19 @@
+{%extends 'myapp/base.html'%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+<div class="col-sm-6">
+<div class="card">
+  <div class="card-header" style=background-color:dodgerblue;color:white;>
+<legend>Contact Us!</legend>
+</div>
+<div class="card-body">
+<form method="POST" action="" enctype="multipart/form-data">
+{%csrf_token%}
+{{form|crispy}}
+<button class="btn btn-sm btn-outline-success">Send Message</button>
+</form>
+</div>
+</div>
+</div>
+{%endblock%}
