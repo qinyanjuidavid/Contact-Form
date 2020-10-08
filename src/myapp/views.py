@@ -19,8 +19,9 @@ def ContactView(request):
             message=form.cleaned_data['message']
             try:
                 send_mail(subject,message,from_email,['tabibuhospital.com'])
+                messages.success(request,'Your Message was successfully submitted, Thank You!')
             except BadHeaderError:
-                return HttpResponse('Invalid header found.')
+                messages.warning(request,'An Invalid Header was Found!')
             return HttpResponseRedirect('/')
     context={
     'form':form
@@ -39,9 +40,9 @@ def FeedbackView(request):
             try:
                 send_mail(subject,message,sender,['tabibuhospital.com'])
                 form.save()
-                messages.info(request,'Feedback was successfully submitted!')
+                messages.success(request,'Feedback was successfully submitted!')
             except BadHeaderError:
-                messages.danger(request,'Invalid header found!')
+                messages.warning(request,'Invalid header found!')
                 return HttpResponseRedirect("/feedback/")
             return HttpResponseRedirect('/feedback/')
         else:
